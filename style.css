@@ -1,0 +1,22 @@
+h1 {
+    padding-top: 100px;
+}
+
+.contents {
+    padding: 30px;
+}
+
+h1 a {
+    text-decoration: none;
+}
+
+.count-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.count {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 5px;
+}

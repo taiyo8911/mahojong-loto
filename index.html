@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>麻雀 組み合わせツール</title>
+</head>
+
+<body id="body">
+    <div id="container" class="container text-center">
+        <h1 class="mb-4"><a href="">麻雀 組み合わせツール</a></h1>
+
+        <div class="mb-4 contents">
+            <label>参加人数:<input type="tel" id="player-count" maxlength="2"></label>
+            <p>※最大50人まで</p>
+        </div>
+
+        <div class="mb-4 contents">
+            <button id="go" onclick="this.disabled = true;">決定</button>
+            <button id="random" onclick="makeTable()" disabled="true">抽選</button>
+        </div>
+
+        <div class="mb-4" id="errMsg"></div>
+
+        <div id="count_" class="mb-4 count-container" style="display: none;">
+            <div>必要卓数: <span id="table-count" class="count"></span></div>
+            <div>余り人数: <span id="remainder-count" class="count"></span></div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

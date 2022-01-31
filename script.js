@@ -134,7 +134,7 @@ function makeTable() {
     } else {
         let p = document.createElement('p');
         p.innerHTML =
-            `<p class="display-4">落選は・・・</p>
+            `<p class="display-4">お休みは・・・</p>
             <p>${notPlayerList}</p>`
 
 

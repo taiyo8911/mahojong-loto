@@ -1,22 +1,33 @@
-h1 {
-    padding-top: 100px;
+/* モーダルウィンドウ */
+#modal-content {
+    width: 90%;
+    margin: 1.5em auto 0;
+    padding: 10px 20px;
+    border: 2px solid #aaa;
+    background: #fff;
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
-.contents {
-    padding: 30px;
+.button-link {
+    color: #00f;
 }
 
-h1 a {
-    text-decoration: none;
+.button-link:hover {
+    cursor: pointer;
+    color: #f00;
 }
 
-.count-container {
-    display: flex;
-    justify-content: space-around;
-}
-
-.count {
-    font-weight: bold;
-    font-size: 20px;
-    margin-left: 5px;
+/* オーバーレイ */
+#modal-overlay {
+    z-index: 1;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-color: rgba(0, 0, 0, 0.75);
 }

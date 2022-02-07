@@ -8,33 +8,38 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <title>麻雀🀄組み合わせツール</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>麻雀🀄席順ランダム</title>
 </head>
 
 <body id="body">
     <div id="container" class="container text-center">
-        <h1 class="mb-4"><a href="">麻雀🀄組み合わせツール</a></h1>
+        <h1 class="mb-4" style="padding-top: 100px;"><a href="">麻雀🀄席順ランダム</a></h1>
 
-        <div class="mb-4 contents">
-            <label>参加人数:<input type="tel" id="player-count" maxlength="2"></label>
-            <p>※最大50人まで</p>
+        <div class="mb-4">
+            <p>※参加人数を入力して決定を押してください。</p>
         </div>
 
-        <div class="mb-4 contents">
-            <button id="go" onclick="this.disabled = true;">決定</button>
-            <button id="random" onclick="makeTable()" disabled="true">抽選</button>
+        <div class="mb-4 p-5">
+            <label>参加人数:<input type="text" id="player-count" maxlength="2" pattern="	^[0-9]+$"></label>
+            <p>※最大20人まで</p>
+        </div>
+
+        <div class="mb-4 p-1">
+            <button id="go" onclick="this.disabled = true;" class="btn btn-lg btn-primary">決定</button>
+            <button id="choice" onclick="makeTable()" disabled="true" class="btn btn-lg btn-primary">抽選</button>
         </div>
 
         <div class="mb-4" id="errMsg"></div>
 
-        <div id="count_" class="mb-4 count-container" style="display: none;">
-            <div>必要卓数: <span id="table-count" class="count"></span></div>
-            <div>余り人数: <span id="remainder-count" class="count"></span></div>
+        <!-- 初期状態は非表示のモーダルウィンドウ -->
+        <div id="modal-content" style="display: none;">
+            <p><a href="index.html" id="modal-close" class="button-link">閉じる</a></p>
         </div>
-
     </div>
 
-    <script src="script.js"></script>
+    <script src="main.js"></script>
+    <script src="modal.js"></script>
 </body>
 
 </html>

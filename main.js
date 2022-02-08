@@ -6,8 +6,9 @@ var notPlayerCount = 0;
 var tableCount = 0;
 var playerList = [];
 var notPlayerList = [];
-var input = document.querySelector('input');
-var go_btn = document.querySelector('#go');
+var return_btn = document.querySelector('#return');
+var select = document.querySelector('[name="player_count"]');
+var choice_btn = document.getElementById('choice');
 
 // 配列をシャッフルする関数
 function arrayShuffle(array) {
@@ -25,54 +26,51 @@ function arrayShuffle(array) {
 }
 
 
-// 決定ボタン(#go)が押下されたら、必要卓数、あまり人数を表示。除外メンバー、参加メンバーを決定
-go_btn.addEventListener('click', () => {
-    // playerList = new Array(); // 配列を初期化
-    playerCount = document.getElementById('player-count').value; // 参加人数
+// 人数が入力された時の処理（参加人数、必要卓数、あまり人数を計算する）
+select.onchange = event => {
+    playerCount = select.selectedIndex; // 参加人数
+    tableCount = Math.floor(playerCount / 4); // 必要卓数
+    notPlayerCount = playerCount % 4; // 余り
+    return_btn.disabled = false; // 決定ボタンを押せるようにする
 
-    if (playerCount > 20) {
-        errMsg.innerText = "※参加人数は、20人までです!!";
-        input.value = "";
-    } else {
-        tableCount = Math.floor(playerCount / 4); // 必要卓数
-        notPlayerCount = playerCount % 4; // 余り
+}
 
-        // エラーメッセージを消去
-        errMsg.innerText = "";
 
-        // プレイヤー名を入力して保存する
-        for (var i = 0; i < playerCount; i++) {
-            playerList[i] = prompt(`参加者${i + 1} の名前を入力して、OKボタンを押して下さい!`);
-        }
+// 決定ボタン(#return_btn)が押下された時の処理（参加メンバーを決める）
+return_btn.addEventListener('click', () => {
+    // プレイヤー名を入力して保存する
+    for (var i = 0; i < playerCount; i++) {
+        playerList[i] = prompt(`参加者${i + 1} の名前を入力して、OKボタンを押して下さい!`);
+    }
 
-        // メンバーをシャッフル決定する
-        playerList = arrayShuffle(playerList);
+    // メンバーをシャッフル決定する
+    playerList = arrayShuffle(playerList);
 
-        // シャッフルした配列の0番目〜の人が欠場
-        notPlayerList = playerList.splice(playerList[0], notPlayerCount);
+    // シャッフルした配列の0番目〜の人を欠場にする
+    notPlayerList = playerList.splice(playerList[0], notPlayerCount);
 
-        document.getElementById('choice').disabled = false;
-    };
-
+    // 抽選ボタンを押せるようにする
+    choice_btn.disabled = false;
 });
 
 
-// 抽選結果を作成
+// 抽選ボタンが押された時の処理（結果を表示）
 function makeTable() {
 
     // テーブルの作成
     // https://www.delftstack.com/ja/howto/javascript/create-table-javascript/
 
     let table = document.createElement('table');
+    table.className = "table table-success table-striped table-hover";
     let thead = document.createElement('thead');
     let tbody = document.createElement('tbody');
 
-    table.className = "table table-success table-striped table-hover";
     table.appendChild(thead);
     table.appendChild(tbody);
 
     document.getElementById('modal-content').appendChild(table);
 
+    // 見出し行を作成する
     let heading_row = document.createElement('tr');
 
     let heading_1 = document.createElement('th');
@@ -92,9 +90,8 @@ function makeTable() {
     heading_row.appendChild(heading_5);
     thead.appendChild(heading_row);
 
-
+    // 参加者一覧を作る
     for (var i = 0; i < tableCount; i++) {
-
         let row = document.createElement('tr');
 
         let row_data_1 = document.createElement('td');
@@ -109,7 +106,6 @@ function makeTable() {
         let row_data_5 = document.createElement('td');
         row_data_5.innerHTML = `${playerList[3]}`;
 
-
         row.appendChild(row_data_1);
         row.appendChild(row_data_2);
         row.appendChild(row_data_3);
@@ -117,22 +113,16 @@ function makeTable() {
         row.appendChild(row_data_5);
         tbody.appendChild(row);
 
-        // 配列の前から4つを削除して次の行を印字
+        // 次の行を作るために、配列の前から4つを削除する
         playerList.splice(playerList[0], 4);
     }
-
 
     if (notPlayerList == "") {
     } else {
         let p = document.createElement('p');
         p.innerHTML =
-            `<p>お休みは・・・</p>
+            `<p class="lead">お休みは・・・</p>
             <p>${notPlayerList}</p>`
-
-
         document.getElementById('modal-content').appendChild(p);
     }
-
-    document.getElementById('choice').disabled = true;
-
 }

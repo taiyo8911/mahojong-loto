@@ -14,19 +14,26 @@
 
 <body id="body">
     <div id="container" class="container text-center">
-        <h1 class="mb-4" style="padding-top: 100px;"><a href="">麻雀🀄席順ランダム</a></h1>
-
-        <div class="mb-4">
-            <p>※参加人数を入力して決定を押してください。</p>
-        </div>
+        <h1 class="mb-4" style="padding-top: 70px;"><a href="">麻雀🀄席順ランダム</a></h1>
 
         <div class="mb-4 p-5">
-            <label>参加人数:<input type="text" id="player-count" maxlength="2" pattern="	^[0-9]+$"></label>
-            <p>※最大20人まで</p>
+            <p>参加人数を入力</p>
+            <form name="form">
+                <select name="player_count" required>
+                    <option value="">選択してください</option>
+                    <script>
+                        for (var i = 1; i < 21; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                    </script>
+                </select>
+            </form>
         </div>
 
+
         <div class="mb-4 p-1">
-            <button id="go" onclick="this.disabled = true;" class="btn btn-lg btn-primary">決定</button>
+            <button id="return" disabled="true" onclick="this.disabled = true;"
+                class="btn btn-lg btn-primary">決定</button>
             <button id="choice" onclick="makeTable()" disabled="true" class="btn btn-lg btn-primary">抽選</button>
         </div>
 
